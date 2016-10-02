@@ -1,8 +1,9 @@
 var shadowDOMElement;
 var canvasLocation ='';
-var maxFreq = 493;
-var minFreq = 261;
-var currFreq, currVol;
+var maxFreq = 1500;
+var minFreq = 50;
+var currFreq, currVol, currPan;
+var xPosDiff=0, yPosDiff=0;
 
 //for object in setpu (??)
 funcNames = refData["classitems"].map(function(x){
@@ -21,6 +22,7 @@ var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 // create Oscillator node
 var oscillatorNode = audioCtx.createOscillator();
 var gainNode = audioCtx.createGain();
+var panNode = audioCtx.createStereoPanner();
 
 funcNames = funcNames.filter(function(x) {
   var className = x["class"];
@@ -44,12 +46,17 @@ funcNames.forEach(function(x){
       for(var i =0; i < x.params.length; i++) {
         if(x.params[i].description.indexOf('x-coordinate')>-1){
           xPosPrev = arguments[i];
+          xPosCurr = arguments[i];
+        }
+        if(x.params[i].description.indexOf('y-coordinate')>-1){
+          yPosPrev = arguments[i];
+          yPosCurr = arguments[i];
         }
       }
     }
 
     // Pull out only the shapes in draw()
-    else if(frameCount > 1 && (frameCount%10 == 0) && x.module=='Shape') {
+    else if(frameCount > 1 && (frameCount%1 == 0) && x.module=='Shape') {
       //pull out only the x coord values and compare with prev value
       for(var i =0; i < x.params.length; i++) {
         if(x.params[i].description.indexOf('x-coordinate')>-1){
@@ -57,14 +64,21 @@ funcNames.forEach(function(x){
           xPosCurr = arguments[i];
           xPosDiff = xPosCurr - xPosPrev;
           xPosPrev = xPosCurr;
-          if(abs(xPosDiff>0))
-          {
-            currFreq = (xPosCurr/width)*(maxFreq-minFreq) + minFreq;
-            currVol = (xPosCurr/width)*0.5 +0.1;
-            gainNode.gain.value = currVol;
-            // oscillatorNode.frequency.value = currFreq
-          }
-
+        }
+        if(x.params[i].description.indexOf('y-coordinate')>-1){
+          yPosCurr = arguments[i];
+          yPosDiff = yPosCurr - yPosPrev;
+          yPosPrev = yPosCurr;
+        }
+        if(abs(xPosDiff>0)||abs(yPosDiff>0))
+        {
+          currFreq = maxFreq - (yPosCurr/height)*(maxFreq-minFreq) + minFreq;
+          currVol = (xPosCurr/width)*0.5 +0.1;
+          currPan = (xPosCurr/width)*2 - 1;
+          console.log(currFreq);
+          oscillatorNode.frequency.value = currFreq;
+          gainNode.gain.value = currVol;
+          panNode.pan.value = currPan;
         }
       }
     }
@@ -86,6 +100,7 @@ window.onload = function() {
   oscillatorNode.frequency.value = 440; // value in hertz
   oscillatorNode.start();
   oscillatorNode.connect(gainNode);
-  gainNode.connect(audioCtx.destination);
+  gainNode.connect(panNode);
+  panNode.connect(audioCtx.destination);
   gainNode.gain.value = 0;
 }

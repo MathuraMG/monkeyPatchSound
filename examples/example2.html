@@ -5,7 +5,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.dom.min.js"></script>
     <script type="text/javascript" src="http://chir.ag/projects/ntc/ntc.js"></script>
-    <script src="../intercepts/interceptPan.js"></script>
+    <script src="../intercept-p5.js"></script>
     <link rel="stylesheet" href="../style.css">
   </head>
 
@@ -13,30 +13,17 @@
     <div id="canvas-sub"></div>
     <script>
     var x = 0;
-    var ballHeight;
-    var motionOption;
       function setup() {
         createCanvas(400, 400);
-        ballHeight = createSlider(0, height, 20);
-        motionOption = createRadio();
-        debugger;
-        motionOption.option("up to down",1);
-        motionOption.option("left to right",2);
-        motionOption.option;
+
       }
 
       function draw() {
         background('white');
         fill('red');
-        if(motionOption.value() == "up to down"){
-          ellipse((x)%width,ballHeight.value(),20,20);
-        }
-        else {
-          ellipse(ballHeight.value(),(x)%height,20,20);
-        }
-
-
+        ellipse(0,x%height,20,20);
         x = x+5;
+
       }
     </script>
     <a class="page-link" href="../index.html">Back</a>
