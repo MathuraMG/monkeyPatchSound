@@ -1,6 +1,6 @@
 body {
   font-family: 'Helvetica';
-  background: #fbf0e0;
+  background: #ffffff;
   font-weight: 100;
   padding: 10px;
 }
@@ -18,16 +18,21 @@ body {
   margin: 25px 0;
   color: #444444;
 }
-
+.page-sub-title {
+  display: block;
+  text-decoration: none;
+  margin: 25px 0;
+  color: #888888;
+}
 .page-link {
   display: block;
   text-decoration: none;
   margin: 15px 0;
-  color: #888888;
+  color: #111111;
 }
 
 .page-link:hover {
-  color: #a74000;
+  color: #ed225d;
 }
 
 .page-content {
@@ -35,14 +40,6 @@ body {
   line-height: 22px;
   display: block;
   color: #888888;
-}
-
-.shadowDOM-content-summary {
-  margin: 15px 0;
-}
-
-.shadowDOM-content-table {
-  margin: 15px 0;
 }
 
 tr, td, th{
@@ -63,5 +60,17 @@ tr, td, th{
 }
 
 .source-link:hover {
-  color: #a74000;
+  color: #ed225d;
+}
+
+.github-link {
+  display: block;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 25px 0;
+  color: #888888;
+}
+
+.github-link:hover {
+  color: #ed225d;
 }

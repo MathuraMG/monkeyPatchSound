@@ -1,7 +1,7 @@
 var shadowDOMElement;
 var canvasLocation ='';
-var maxFreq = 1500;
-var minFreq = 50;
+var maxFreq = 1760; //A6
+var minFreq = 65; //C2
 var currFreq, currVol, currPan;
 var xPosDiff=0, yPosDiff=0;
 
@@ -73,7 +73,7 @@ funcNames.forEach(function(x){
         if(abs(xPosDiff>0)||abs(yPosDiff>0))
         {
           currFreq = maxFreq - (yPosCurr/height)*(maxFreq-minFreq) + minFreq;
-          currVol = (xPosCurr/width)*0.5 +0.1;
+          currVol = 0.5;
           currPan = (xPosCurr/width)*2 - 1;
           console.log(currFreq);
           oscillatorNode.frequency.value = currFreq;

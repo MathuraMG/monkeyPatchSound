@@ -1,7 +1,7 @@
 var shadowDOMElement;
 var canvasLocation ='';
-var maxFreq = 1500;
-var minFreq = 50;
+var maxFreq = 1760; //A6
+var minFreq = 65; //C2
 var currFreq, currVol, currPan;
 var xPosDiff=0, yPosDiff=0;
 
@@ -72,13 +72,10 @@ funcNames.forEach(function(x){
         }
         if(abs(xPosDiff>0)||abs(yPosDiff>0))
         {
-          currFreq = maxFreq - (yPosCurr/height)*(maxFreq-minFreq) + minFreq;
-          currVol = 0.5;
-          currPan = (xPosCurr/width)*2 - 1;
-          console.log(currFreq);
+          currFreq = (xPosCurr/width)*(maxFreq-minFreq) + minFreq;
+          currVol = 0.9 - (yPosCurr/height)*0.8;
           oscillatorNode.frequency.value = currFreq;
           gainNode.gain.value = currVol;
-          panNode.pan.value = currPan;
         }
       }
     }
@@ -100,7 +97,6 @@ window.onload = function() {
   oscillatorNode.frequency.value = 440; // value in hertz
   oscillatorNode.start();
   oscillatorNode.connect(gainNode);
-  gainNode.connect(panNode);
-  panNode.connect(audioCtx.destination);
+  gainNode.connect(audioCtx.destination);
   gainNode.gain.value = 0;
 }

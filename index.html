@@ -7,43 +7,47 @@
   </head>
 
   <body>
-    <h2 class="page-heading"> Canvas O/P Testing </h2>
+    <h2 class="page-heading"> Canvas O/P Tonal Testing </h2>
 
     <h3 class="page-title">Why are we doing this?</h3>
     <p class="page-content">
       Since the content of the canvas is inaccessible, it is important to
-      ensure that the content can be explained in some way. To do this, we
-      added a textual counterpart to every object drawn on the canvas.
+      ensure that the content can be explained in some way - especially in the
+      case of movement/ To do this, we add a tonal output to indicate movement.
+      </thead>
     </p>
+    <h4 class="page-sub-title"> Method 1 - Frequency vs. Volume </h4>
     <p class="page-content">
-      The output contains a summary which is a gist of what is present in the
-      canvas along with a table that contains details of objects. Both summary
-      and table update in realtime with the sketch.
-      NOTE: The output is currently visible - however this will not be the
-      case in the IDE. This is just temporary for also testing without a
-      screenreader.
+      In this case, the movement from left to right is indicated by an increase
+      frequency from 65Hz to 1760Hz.
+      Movement from up to down in indicated by a derease in volume.
     </p>
+    <a class="page-link" href="examples/example1.html">Click here to see method 1 in action
+      <img alt="graph showing ball moving from left to right.Volume marks the y axis and frequency marks the x" class="image-link" src="assets/img1.png"></img>
+    </a>
+    <h4 class="page-sub-title"> Method 2 - Panning vs. Frequency </h4>
+    <p class="page-content">
+      In this case, we take advantage of stereo outputs. Movement from left to right is
+      indicated by panning the sound from the left to the right earphone/headphone.
+      Also, since a lot of cultural references have higher frequency on top and lower in the bottom (such as bombs dropping in the road runner show!),
+      up to down movement is indicated by a decrease in
+      frequency from 1760Hz to 65Hz.
+    </p>
+    <a class="page-link" href="examples/example2.html">Click here to see method 1 in action
+      <img alt="graph showing ball moving from left to right.Frequency marks the y axis and panning marks the x" class="image-link" src="assets/img2.png"></img>
+    </a>
 
     <h3 class="page-title">Implementation</h3>
     <p class="page-content">
       The implementation to get the data for the p5 objects is done using an
-      interceptor/monkey patch. The patch gets the arguments from the function
-      call and store it in a variable.
-      This content (summary and details) is refreshed every 100 frames - it
-      contains the approximate location of the object along with its colour and
-      other attributes.
+      interceptor/monkey patch. The patch gets the position of the object from the function
+      call and compares it with previous position.
+      If there is a change in position, then the necessary mapping is done to produce the sounds.
+      As of now, this implementation exists only for one moving object.
     </p>
 
-    <a class="github-link" target="_blank" href="https://github.com/MathuraMG/monkeyPatchTest/tree/gh-pages">
+    <a class="github-link" target="_blank" href="https://github.com/MathuraMG/monkeyPatchSound">
       Source code
-    </a>
-
-    <h3 class="page-title">Examples</h3>
-    <a class="page-link" href="examples/example1.html">Shapes on a canvas
-      <img class="image-link" src="assets/img1.png"></img>
-    </a>
-    <a class="page-link" href="examples/example2.html">Shapes on a canvas
-      <img class="image-link" src="assets/img2.png"></img>
     </a>
 
 </html>
