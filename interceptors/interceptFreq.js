@@ -1,7 +1,7 @@
 var shadowDOMElement;
 var canvasLocation ='';
-var maxFreq = 1760; //A6
-var minFreq = 65; //C2
+var maxFreq = 1000;
+var minFreq = 250;
 var currFreq, currVol, currPan;
 var xPosDiff=0, yPosDiff=0;
 
