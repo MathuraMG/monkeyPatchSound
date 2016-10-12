@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <title> Sound Output Example </title>
     <script src="../data.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.dom.min.js"></script>
@@ -16,7 +17,8 @@
     var motionOption;
       function setup() {
         Heading = createElement('h2','Method 2 - Panning vs. Frequency');
-        createCanvas(400, 400);
+        canvas = createCanvas(400, 400);
+        canvas.attribute('title','grey canvas with moving pink ball');
 
         motionOptionLabel = createElement('h4','Movement direction');
         motionOption = createRadio();
