@@ -75,10 +75,8 @@ funcNames.forEach(function(x){
           //fn = f0 * (a)n
           currLogFreq = 440 * Math.pow(Math.pow(2,(1/12)),currNote);
           currVol = 0.4;
-          console.log(frameCount%10);
           x_coord = frameCount%10 - 5;
           currVol = 1*Math.exp(-(x_coord*x_coord));
-          console.log(currVol);
           currPan = (xPosCurr/width)*2 - 1;
           oscillatorNode.frequency.value = currLogFreq;
           gainNode.gain.value = currVol;
@@ -98,7 +96,6 @@ funcNames.forEach(function(x){
 ***/
 
 window.onload = function() {
-  console.log('test test');
   oscillatorNode.type = 'sine';
   oscillatorNode.frequency.value = 440; // value in hertz
   oscillatorNode.start();
