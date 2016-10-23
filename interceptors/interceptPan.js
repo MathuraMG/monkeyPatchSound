@@ -32,7 +32,6 @@ funcNames = funcNames.filter(function(x) {
 // create web audio api context
 console.log('testing sound');
 
-
 var WIDTH = window.innerWidth;
 var HEIGHT = window.innerHeight;
 
@@ -72,16 +71,17 @@ funcNames.forEach(function(x){
         }
         if(abs(xPosDiff>0)||abs(yPosDiff>0))
         {
-          currFreq = (1-yPosCurr/height)*(maxFreq-minFreq) + minFreq;
-          currVol = 0.5;
+          currNote = (1-yPosCurr/height)*(12); // mapping hieghts to notes from 1-100
+          //fn = f0 * (a)n
+          currLogFreq = 440 * Math.pow(Math.pow(2,(1/12)),currNote);
+          currVol = 0.4;
           currPan = (xPosCurr/width)*2 - 1;
-          oscillatorNode.frequency.value = currFreq;
+          oscillatorNode.frequency.value = currLogFreq;
           gainNode.gain.value = currVol;
           panNode.pan.value = currPan;
         }
       }
     }
-
     return originalFunc.apply(this,arguments);
   }
 });
