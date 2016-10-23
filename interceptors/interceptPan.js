@@ -75,6 +75,10 @@ funcNames.forEach(function(x){
           //fn = f0 * (a)n
           currLogFreq = 440 * Math.pow(Math.pow(2,(1/12)),currNote);
           currVol = 0.4;
+          console.log(frameCount%12);
+          x_coord = frameCount%12 - 6;
+          currVol = 1*Math.exp(-(x_coord*x_coord));
+          console.log(currVol);
           currPan = (xPosCurr/width)*2 - 1;
           oscillatorNode.frequency.value = currLogFreq;
           gainNode.gain.value = currVol;
