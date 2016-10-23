@@ -31,6 +31,10 @@
         ballMovt = createSlider(0, height, 20,10);
         ballMovt.attribute('aria-label','change position');
 
+        ballSpeedLabel = createElement('h4','change Speed of Ball Movement');
+        ballSpeed = createSlider(1, 15, 3);
+        ballSpeed.attribute('aria-label','change speed');
+
       }
 
       function draw() {
@@ -43,9 +47,7 @@
         else {
           ellipse((x)%width,ballMovt.value(),40,40);
         }
-
-
-        x = x+3;
+        x = x + ballSpeed.value();
       }
     </script>
     <a class="page-link" href="../index.html">Back</a>
